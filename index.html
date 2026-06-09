@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NFT ARUKA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleModal('auth-modal', false)">&times;</span>
+            <h2 id="modal-title">Register</h2>
+            <form id="auth-form">
+                <input type="text" id="auth-login" placeholder="Login" required>
+                <input type="password" id="auth-password" placeholder="Password" required>
+                <div class="modal-footer">
+                    <span id="switch-auth-mode" onclick="switchAuthMode()">Already have an account? Login</span>
+                    <button type="submit" id="auth-submit-btn" class="btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">⚡ ARUKA NFT</div>
+            <nav>
+                <button onclick="switchPage('catalog')" class="nav-btn active" id="nav-catalog">🎨 NFT's</button>
+                <button onclick="switchPage('profile')" class="nav-btn" id="nav-profile">👤 Profile</button>
+                <button onclick="switchPage('my-nfts')" class="nav-btn" id="nav-my-nfts">🏆 My NFT's</button>
+                <button onclick="switchPage('create-nft')" class="nav-btn" id="nav-create-nft">✨ Create nft</button>
+            </nav>
+            <div class="auth-status-zone">
+                <button id="sidebar-auth-btn" onclick="openAuth()" class="btn-secondary">Login/Register</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <section id="page-catalog" class="page-section">
+                <div class="hero-section">
+                    <h1>Discover <span class="gradient-text">Digital Art</span></h1>
+                    <p class="hero-subtitle">Explore unique NFTs from talented creators worldwide</p>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="🔍 Search NFTs by name..." oninput="renderCatalog()">
+                </div>
+                <div class="nft-grid" id="catalog-grid"></div>
+            </section>
+
+            <section id="page-nft-details" class="page-section hidden">
+                <button onclick="switchPage('catalog')" class="back-btn">← Back to Collection</button>
+                <div class="nft-detail-container" id="nft-detail-content"></div>
+            </section>
+
+            <section id="page-profile" class="page-section hidden">
+                <h1>✨ Create Profile</h1>
+                <form id="profile-form" class="form-container">
+                    <div class="avatar-upload">
+                        <div class="avatar-preview" id="avatar-preview">🎨</div>
+                        <div class="avatar-info">
+                            <p>Recommended format PNG or JPG</p>
+                            <p>Size at least 300x300 px, max 10 mb</p>
+                        </div>
+                    </div>
+                    <label>Username</label>
+                    <input type="text" id="profile-username" placeholder="Enter your username">
+                    <label>Bio</label>
+                    <textarea id="profile-bio" rows="4" placeholder="Tell about yourself..."></textarea>
+                    <button type="submit" class="btn-primary">💾 Save Profile</button>
+                </form>
+            </section>
+
+            <section id="page-create-nft" class="page-section hidden">
+                <h1>🚀 Create New Item</h1>
+                <form id="create-nft-form" class="form-container layout-split">
+                    <div class="upload-zone">
+                        <div class="upload-icon">📷</div>
+                        <p>Upload File</p>
+                        <p class="subtext">Max size 100Mb, format: PNG, GIF, JPG, WEBP, MP3</p>
+                        <input type="text" id="nft-img-url" placeholder="Paste Image URL here" required>
+                    </div>
+                    <div class="fields-zone">
+                        <label>Item Name</label>
+                        <input type="text" id="nft-name" placeholder="Enter NFT name" required>
+                        <label>Category</label>
+                        <select id="nft-category">
+                            <option value="Collectibles">🎁 Collectibles</option>
+                            <option value="Games">🎮 Games</option>
+                            <option value="Art">🎨 Art</option>
+                        </select>
+                        <label>Item Type</label>
+                        <select id="nft-type">
+                            <option value="Single">Single Item</option>
+                            <option value="Multiple">Multiple Items</option>
+                        </select>
+                        <label>Price</label>
+                        <div class="price-input-wrapper">
+                            <input type="number" id="nft-price" placeholder="Set price" required>
+                            <span class="currency-tag">QUBE</span>
+                        </div>
+                        <button type="submit" class="btn-primary">✨ Create NFT</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="page-my-nfts" class="page-section hidden">
+                <h1>🏆 My Collection</h1>
+                <div class="nft-grid" id="my-nfts-grid"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
